@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atoll</title>
+  <link rel="icon" href="{{ url_for('static', filename='atoll-logo-mini.jpg') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<!-- Эффект погружения -->
+<div id="diveEffect" class="dive-effect"></div>
+
+<!-- Навигационное меню -->
+<div class="navigation-menu">
+  <ul class="cloud-nav" id="navMenu">
+    <li>
+      <a href="#main-section" class="cloud-item active" data-section="main-section">О проекте</a>
+      <div class="bubble-decoration"></div>
+    </li>
+    <li>
+      <a href="#pricing-section" class="cloud-item" data-section="pricing-section">Цены</a>
+      <div class="bubble-decoration"></div>
+    </li>
+    <li>
+      <a href="#reviews-section" class="cloud-item" data-section="reviews-section">Отзывы</a>
+      <div class="bubble-decoration"></div>
+    </li>
+  </ul>
+</div>
+
+<!-- Главный экран -->
+<div class="main-container">
+  <div id="buoyBtnContainer" class="buoy-button-container">
+    <button id="buoyBtn" class="buoy-button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="white" d="M7 10l5 5 5-5z"/>
+      </svg>
+    </button>
+  </div>
+  <div class="ocean">
+    <canvas id="waveCanvas"></canvas>
+  </div>
+</div>
+
+<!-- 3D Island Section - Full Screen -->
+<section id="island-section" class="fullscreen-section">
+  <canvas id="atollCanvas"></canvas>
+</section>
+
+<!-- Подводная секция -->
+<div class="underwater-section">
+  <div class="bubbles" id="bubbles"></div>
+  <div class="sea-creatures-container">
+    <div class="fish-school-wrapper" id="fishSchool1">
+      <div class="fish-school" style="--period: 4s; --amplitude: 50px;">
+        <div class="fish" style="top: 0; left: 0;"></div>
+        <div class="fish" style="top: 20px; left: 30px;"></div>
+        <div class="fish" style="top: -10px; left: 60px;"></div>
+      </div>
+    </div>
+    <div class="fish-school-wrapper" id="fishSchool2">
+      <div class="fish-school" style="--period: 5s; --amplitude: 60px;">
+        <div class="fish" style="top: 10px; left: 20px;"></div>
+        <div class="fish" style="top: -15px; left: 50px;"></div>
+        <div class="fish" style="top: 25px; left: 80px;"></div>
+      </div>
+    </div>
+    <div class="seaweed" style="left: 10%;"></div>
+    <div class="seaweed" style="left: 30%;"></div>
+    <div class="seaweed" style="left: 70%;"></div>
+    <div class="jellyfish" style="left: 20%; top: 30%;"></div>
+    <div class="jellyfish" style="left: 80%; top: 50%;"></div>
+  </div>
+
+  <!-- О проекте -->
+  <section id="about-section" class="section-content">
+    <div class="info-panel about-panel">
+      <h2 class="reveal-text">О проекте</h2>
+      <p class="animated-paragraph">
+        Atoll — это ваш <span class="highlight-text">уголок спокойствия и творчества</span> в цифровом мире.
+        Мы создали платформу, где вы можете <span class="highlight-text">расслабиться</span>,
+        <span class="highlight-text">творить</span> и <span class="highlight-text">вдохновляться</span>,
+        погружаясь в атмосферу тропического острова.
+        Наш проект объединяет технологии и природу, чтобы подарить вам уникальный опыт.
+      </p>
+
+      <!-- Карточки преимуществ -->
+      <div class="features-container">
+        <div class="feature-card">
+          <div class="feature-icon relaxation-icon">
+            <div class="icon-animation"></div>
+          </div>
+          <h3>Расслабление</h3>
+          <p>Снимите стресс в спокойной атмосфере атолла</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon creativity-icon">
+            <div class="icon-animation"></div>
+          </div>
+          <h3>Творчество</h3>
+          <p>Найдите вдохновение для новых идей</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon community-icon">
+            <div class="icon-animation"></div>
+          </div>
+          <h3>Сообщество</h3>
+          <p>Общайтесь с единомышленниками</p>
+        </div>
+      </div>
+
+      <button class="create-atoll-btn" id="createAtollBtn">
+        <span class="btn-text">Создать свой атолл</span>
+        <span class="btn-wave"></span>
+      </button>
+
+      <!-- Плавающие пузыри за кнопкой -->
+      <div class="button-bubbles">
+        <div class="button-bubble b1"></div>
+        <div class="button-bubble b2"></div>
+        <div class="button-bubble b3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Возможности -->
+  <section id="features-section" class="section-content">
+    <div class="info-panel">
+      <h2>Возможности</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Free</h3>
+          <p>Бесплатный доступ</p>
+          <ul>
+            <li>Основные функции</li>
+            <li>Ограниченное хранилище</li>
+            <li>Сообщество</li>
+          </ul>
+          <p class="price">0 ₽</p>
+        </div>
+        <div class="pricing-card">
+          <h3>Base</h3>
+          <p>Расширенные возможности</p>
+          <ul>
+            <li>Все функции Free</li>
+            <li>Дополнительное хранилище</li>
+            <li>Приоритетная поддержка</li>
+          </ul>
+          <p class="price">499 ₽/мес</p>
+        </div>
+        <div class="pricing-card">
+          <h3>Premium</h3>
+          <p>Полный доступ</p>
+          <ul>
+            <li>Все функции Base</li>
+            <li>Неограниченное хранилище</li>
+            <li>Эксклюзивные функции</li>
+          </ul>
+          <p class="price">999 ₽/мес</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contact-section" class="section-content">
+    <div class="info-panel">
+      <h2>Отзывы</h2>
+      <div class="reviews-carousel">
+        <div class="review-card">
+          <p>"Atoll — это как отпуск в кармане! Очень вдохновляющая платформа."</p>
+          <p class="review-author">— Анна, дизайнер</p>
+        </div>
+        <div class="review-card">
+          <p>"Я нашел здесь идеальный баланс между работой и отдыхом."</p>
+          <p class="review-author">— Михаил, разработчик</p>
+        </div>
+        <div class="review-card">
+          <p>"Интерфейс и анимации просто потрясающие, рекомендую всем!"</p>
+          <p class="review-author">— Ольга, маркетолог</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Футер -->
+  <footer class="coral-reef-footer">
+    <div class="coral-reef">
+      <div class="coral" style="left: 10%;"></div>
+      <div class="coral" style="left: 30%;"></div>
+      <div class="coral" style="left: 60%;"></div>
+      <div class="coral" style="left: 80%;"></div>
+      <div class="footer-fish" style="left: 20%; top: 50%;"></div>
+      <div class="footer-fish" style="left: 50%; top: 70%;"></div>
+      <div class="footer-fish" style="left: 70%; top: 30%;"></div>
+    </div>
+    <div class="footer-content">
+      <p> 2025 Atoll. Все права защищены.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- Скрипты -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="{{ url_for('static', filename='js/OrbitControls.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
